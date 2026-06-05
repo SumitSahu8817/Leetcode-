@@ -63,7 +63,7 @@ function App() {
   const [authError, setAuthError] = useState('');
   const [authMsg, setAuthMsg] = useState('');
 
-  const BACKEND_URL = 'http://localhost:5000';
+  const BACKEND_URL = 'https://leetcode-backend-7zg4.onrender.com';
   const isDark = theme === 'dark';
 
   // Auto-Save Mechanics
