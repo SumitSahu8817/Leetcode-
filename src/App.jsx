@@ -8,8 +8,8 @@ import { toggleTheme, setLanguage, setCode, setCustomInput, setStatus, setResult
 import axios from 'axios';
 
 function App() {
-  // 📊 RESIZABLE SPLIT-PANE WINDOW MATRIX
-  const [leftWidth, setLeftWidth] = useState(50); // Initial width 50% dono sides barabar
+  
+  const [leftWidth, setLeftWidth] = useState(50); 
   const [isDragging, setIsDragging] = useState(false);
 
   const startResize = (e) => {
@@ -21,10 +21,10 @@ function App() {
     const handleMouseMove = (e) => {
       if (!isDragging) return;
       
-      // Pure screen width ke hisab se mouse percentage nikalna
+     
       let newWidth = (e.clientX / window.innerWidth) * 100;
       
-      // Constraints: Taki khinchte-khinchte pane bilkul gayab na ho jaye (Min 20%, Max 80%)
+      
       if (newWidth > 20 && newWidth < 80) {
         setLeftWidth(newWidth);
       }
@@ -53,7 +53,7 @@ function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showProfileStats, setShowProfileStats] = useState(false);
   
-  // Dynamic metrics states with safe default objects
+  
   const [dbStats, setDbStats] = useState({ solvedEasy: 0, solvedMedium: 0, solvedHard: 0, totalScore: 0, streak: 3 });
   const [leaderboardList, setLeaderboardList] = useState([]);
 
@@ -66,7 +66,7 @@ function App() {
   const BACKEND_URL = 'https://leetcode-backend-7zg4.onrender.com';
   const isDark = theme === 'dark';
 
-  // Auto-Save Mechanics
+  
   useEffect(() => {
     if (code && currentProblem?._id) {
       const delayDebounce = setTimeout(() => {
@@ -76,7 +76,7 @@ function App() {
     }
   }, [code, currentProblem?._id]);
 
-  // 🔥 FIXED: Naya question aate hi purana code flush karne ka engine
+  
   useEffect(() => {
     if (currentProblem?._id) {
       const saved = localStorage.getItem(`autosave_${currentProblem._id}`);
@@ -210,7 +210,7 @@ function App() {
   return (
     <div className={`h-screen ${bgMain} font-sans flex flex-col overflow-hidden text-xs transition-all duration-500`}>
       
-      {/* GLOWING CYBERPUNK NAVBAR */}
+     
       <nav className={`flex items-center justify-between px-5 py-2.5 border-b shadow-lg backdrop-blur-md ${bgCard} relative`}>
         <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => { if(token) setShowProblemsOverlay(true); }}>
           <div className="bg-gradient-to-br from-amber-500 to-orange-600 p-2 rounded-xl text-black shadow-lg shadow-orange-500/20 transform group-hover:rotate-12 transition-transform duration-300"><Cpu size={18} /></div>
@@ -242,7 +242,7 @@ function App() {
         </div>
       </nav>
 
-      {/* OVERLAY 1: LEADERBOARD OVERLAY */}
+     
       {showLeaderboard && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-lg bg-[#111115] border-2 border-blue-500/30 rounded-3xl p-6 shadow-2xl flex flex-col text-white">
@@ -268,7 +268,7 @@ function App() {
         </div>
       )}
 
-      {/* OVERLAY 2: STATS INSIGHTS */}
+     
       {showProfileStats && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-md bg-[#131318] border-2 border-orange-500/30 rounded-3xl p-6 text-white text-center shadow-2xl relative">
@@ -305,7 +305,7 @@ function App() {
         </div>
       )}
 
-      {/* OVERLAY 3: ALL PROBLEMS SELECTION ARCHIVE */}
+     
       {showProblemsOverlay && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 p-6 flex justify-center transition-all duration-300">
           <div className={`w-full max-w-4xl rounded-3xl p-5 flex flex-col shadow-2xl border-2 ${bgCard}`}>
@@ -338,7 +338,7 @@ function App() {
         </div>
       )}
 
-      {/* LOGIN VIEW PANEL */}
+      
       {authView === 'login' && (
         <div className="flex-1 flex items-center justify-center bg-black/20 p-4">
           <div className={`p-6 rounded-2xl border w-full max-w-sm shadow-2xl backdrop-blur-md ${bgCard} border-amber-500/20`}>
@@ -369,7 +369,7 @@ function App() {
         </div>
       )}
 
-      {/* SIGNUP VIEW PANEL */}
+      
       {authView === 'signup' && (
         <div className="flex-1 flex items-center justify-center bg-black/20 p-4">
           <div className={`p-6 rounded-2xl border w-full max-w-sm shadow-2xl backdrop-blur-md ${bgCard} border-amber-500/20`}>
@@ -405,11 +405,11 @@ function App() {
         </div>
       )}
 
-      {/* CORE JUDGE SYSTEM (DYNAMIC SPLIT-PANE CONTAINER INTEGRATION) */}
+      
       {authView === 'judge' && (
         <div className="flex p-3 flex-1 overflow-hidden h-[calc(100vh-50px)] relative">
           
-          {/* PROBLEM DETAILS COLUMN (DYNAMIC RESIZING ATTACHED) */}
+         
           <div 
             style={{ width: `${leftWidth}%` }}
             className={`flex flex-col rounded-xl p-4 overflow-y-auto shadow-sm ${bgCard} border border-gray-800/40 transition-none`}

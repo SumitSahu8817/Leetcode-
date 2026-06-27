@@ -17,12 +17,12 @@ const initialState = {
   status: 'Idle',
   result: null,
   
-  // Auth States
+  
   token: localStorage.getItem('token') || null,
   username: localStorage.getItem('username') || null,
   authView: localStorage.getItem('token') ? 'judge' : 'login',
 
-  // 🔥 Profile Details States
+ 
   userProfile: {
     fullName: localStorage.getItem('user_fullName') || "Sumit Sahu",
     bio: localStorage.getItem('user_bio') || "Competitive Programmer | Full Stack Developer",
@@ -76,7 +76,7 @@ const problemSlice = createSlice({
     setAuthView: (state, action) => {
       state.authView = action.payload;
     },
-    // 🔥 Profile Sync Update Reducer
+    
     updateProfile: (state, action) => {
       state.userProfile = { ...state.userProfile, ...action.payload };
       if(action.payload.fullName) localStorage.setItem('user_fullName', action.payload.fullName);
