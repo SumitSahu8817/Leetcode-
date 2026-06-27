@@ -171,7 +171,7 @@ function App() {
         dispatch(loginSuccess({ token: response.data.token, username: response.data.username }));
       }
     } catch (err) { 
-      setAuthError(err.response?.data?.error || "Galt credentials hain bhai!"); 
+      setAuthError(err.response?.data?.error || "invalid credentials!"); 
     }
   };
 
@@ -185,7 +185,7 @@ function App() {
         email: authEmail,
         password: authPassword
       });
-      setAuthMsg("Account successfully ban gaya! Switching to login...");
+      setAuthMsg("Account created successfully ! Switching to login...");
       setTimeout(() => {
         dispatch(setAuthView('login'));
         setAuthMsg('');
