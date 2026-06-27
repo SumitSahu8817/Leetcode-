@@ -63,7 +63,7 @@ function App() {
   const [authError, setAuthError] = useState('');
   const [authMsg, setAuthMsg] = useState('');
 
-  const BACKEND_URL = 'https://leetcode-backend-7zg4.onrender.com';
+  const BACKEND_URL = 'https://leetcode-backend-9grm.onrender.com';
   const isDark = theme === 'dark';
 
   
