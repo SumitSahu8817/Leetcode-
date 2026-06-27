@@ -126,32 +126,37 @@ function App() {
   };
 
   const handleRun = async (e) => {
-    if (e) e.preventDefault();
-    dispatch(setStatus('Running')); dispatch(setResult(null)); setActiveTab('output');
-    try {
-      const response = await axios.post(`${BACKEND_URL}/run`, { code, input: customInput });
-      dispatch(setResult(response.data));
-    } catch (err) { 
-      dispatch(setResult({ status: "Error", error: "Run Crash or Network Timeout" })); 
-    } finally { 
-      dispatch(setStatus('Idle')); 
-    }
+  if (e) e.preventDefault();
+  dispatch(setStatus('Running')); dispatch(setResult(null)); setActiveTab('output');
+  try {
+    const response = await axios.post(`${BACKEND_URL}/run`, { code, input: customInput });
+    dispatch(setResult(response.data));
+  } catch (err) { 
+    // ACTUAL ERROR DEKHNE KE LIYE ISKO UPDATE KIYA[cite: 4]
+    const errMsg = err.response?.data?.error || err.response?.data?.details || "Network Timeout / Server Unreachable";
+    dispatch(setResult({ status: "Error", error: errMsg })); 
+  } finally { 
+    dispatch(setStatus('Idle')); 
+  }
+};
   };
 
   const handleSubmitCode = async (e) => {
-    if (e) e.preventDefault();
-    if (!currentProblem?._id) return;
-    dispatch(setStatus('Submitting')); dispatch(setResult(null)); setActiveTab('output');
-    try {
-      const response = await axios.post(`${BACKEND_URL}/submit`, { code, problemId: currentProblem._id, username });
-      dispatch(setResult(response.data));
-      fetchLiveUserStats();
-    } catch (err) { 
-      dispatch(setResult({ status: "Error", error: "Submission Pipeline Failure" })); 
-    } finally { 
-      dispatch(setStatus('Idle')); 
-    }
-  };
+  if (e) e.preventDefault();
+  if (!currentProblem?._id) return;
+  dispatch(setStatus('Submitting')); dispatch(setResult(null)); setActiveTab('output');
+  try {
+    const response = await axios.post(`${BACKEND_URL}/submit`, { code, problemId: currentProblem._id, username });
+    dispatch(setResult(response.data));
+    fetchLiveUserStats();
+  } catch (err) { 
+    // ACTUAL ERROR DEKHNE KE LIYE ISKO UPDATE KIYA[cite: 4]
+    const errMsg = err.response?.data?.error || err.response?.data?.details || "Submission Pipeline Interrupted";
+    dispatch(setResult({ status: "Error", error: errMsg })); 
+  } finally { 
+    dispatch(setStatus('Idle')); 
+  }
+};
 
   const handleResetCode = (e) => {
     if (e) e.preventDefault();
