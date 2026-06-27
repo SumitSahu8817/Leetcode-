@@ -357,12 +357,12 @@ function App() {
               <button type="submit" className="w-full py-2.5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-black font-black rounded-xl uppercase tracking-wider text-xs shadow-lg hover:brightness-110 active:scale-95 transition-all">Establish Core Session</button>
             </form>
             <p className="text-[11px] text-center mt-4 text-gray-400">
-              Naya account chahiye?{' '}
+              {' '}
               <span 
                 onClick={() => { dispatch(setAuthView('signup')); setAuthError(''); }} 
                 className="text-amber-500 font-black cursor-pointer hover:underline hover:text-orange-400 transition-colors"
               >
-                Register/Signup Karo
+                Register/Signup 
               </span>
             </p>
           </div>
@@ -393,12 +393,12 @@ function App() {
               <button type="submit" className="w-full py-2.5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 text-black font-black rounded-xl uppercase tracking-wider text-xs shadow-lg hover:brightness-110 active:scale-95 transition-all">Register Node</button>
             </form>
             <p className="text-[11px] text-center mt-4 text-gray-400">
-              Pehle se account hai?{' '}
+              Already have account?{' '}
               <span 
                 onClick={() => { dispatch(setAuthView('login')); setAuthError(''); }} 
                 className="text-amber-500 font-black cursor-pointer hover:underline hover:text-orange-400 transition-colors"
               >
-                Log In Karo
+                Login
               </span>
             </p>
           </div>
@@ -432,7 +432,7 @@ function App() {
             </div>
           </div>
 
-          {/* 🔥 INTERACTIVE RESIZER DRAG BAR */}
+  
           <div 
             onMouseDown={startResize}
             className={`w-2 h-full cursor-col-resize flex flex-col justify-center items-center relative group z-30 transition-all ${isDragging ? 'bg-amber-500/30' : 'hover:bg-amber-500/20'}`}
@@ -440,7 +440,7 @@ function App() {
             <div className={`w-[2px] h-6 rounded-full transition-all ${isDragging ? 'bg-amber-400 h-10 shadow-lg shadow-amber-500' : 'bg-gray-700 group-hover:bg-amber-500 group-hover:h-8'}`}></div>
           </div>
 
-          {/* CODE EDITOR BLOCK (DYNAMIC COMPLEMENTARY WIDTH) */}
+         
           <div 
             style={{ width: `${100 - leftWidth}%` }}
             className="flex flex-col space-y-3 h-full overflow-hidden transition-none"
@@ -458,7 +458,7 @@ function App() {
                   </button>
                   <Code size={12} className="text-amber-400" /> <span className="text-gray-300 font-extrabold">Sandbox Workspace Terminal</span>
                   
-                  {/* 🛠️ REFRESH/RESET BUTTON INTEGRATION */}
+               
                   <button
                     type="button"
                     onClick={handleResetCode}
@@ -478,7 +478,7 @@ function App() {
               </div>
             </div>
 
-            {/* LOWER CONSOLE TERMINAL */}
+          
             <div className={`h-44 border rounded-xl overflow-hidden shadow-lg flex flex-col ${bgCard} border-gray-800/40`}>
               <div className="flex items-center justify-between px-2 bg-black/20 border-b border-gray-800/40">
                 <div className="flex space-x-1 text-[10px] font-black">
@@ -501,7 +501,7 @@ function App() {
                     ) : result ? (
                       <div className="space-y-1 text-left">
                         
-                        {/* SPEED & MEMORY DISPLAY LOGS */}
+                        
                         {result?.time && (
                           <div className="flex items-center space-x-3 mb-1 text-[10px] bg-white/5 p-1 rounded border border-gray-800/50 w-fit text-gray-400">
                             <span className="flex items-center space-x-0.5 font-bold"><Zap size={10} className="text-yellow-400"/> <span>Speed: {result.time}</span></span>
