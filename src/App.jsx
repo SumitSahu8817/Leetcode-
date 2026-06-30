@@ -1,3 +1,34 @@
+// File Path: src/App.jsx
+import { useEffect } from 'react';
+import api from './api'; // Jo Step 1 mein file banayi thi use import karo
+
+function App() {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Backend par request bhej kar verify karo ki token kisi aur ka toh nahi fasa
+      api.get('/api/auth/verify')
+        .then((res) => {
+          console.log("User verified successfully:", res.data.username);
+        })
+        .catch((err) => {
+          // Agar token galat/expired nikla, toh Step 1 ka interceptor storage clear 
+          // karke khud hi user ko login page par redirect kar dega.
+          console.error("Token verification failed, system auto-cleared.");
+        });
+    }
+  }, []);
+
+  return (
+    <div>
+       {/* Tumhari routing aur baki ka frontend component code */}
+    </div>
+  );
+}
+
+export default App;
+
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Editor from '@monaco-editor/react';
@@ -250,7 +281,18 @@ function App() {
             </div>
           )}
           <button type="button" onClick={() => dispatch(toggleTheme())} className={`p-2 rounded-xl border transition-transform active:scale-95 duration-300 ${isDark ? 'bg-[#1c1c24] border-[#2d2d3d] text-yellow-400' : 'bg-amber-50 border-amber-300 text-amber-700'}`}>{isDark ? <Sun size={14} /> : <Moon size={14} />}</button>
-          {token && <button type="button" onClick={() => dispatch(logout())} className="p-2 rounded-xl text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/30 transition-all duration-300"><LogOut size={14} /></button>}
+          {token && <button 
+  type="button" 
+  onClick={() => {
+    localStorage.clear();
+    sessionStorage.clear();
+    dispatch(logout());
+    window.location.href = '/login';
+  }} 
+  className="p-2 rounded-xl text-red-400 bg-red-500/10 border border-red-500/20 hover:bg-red-500/30 transition-all duration-300"
+>
+  <LogOut size={14} />
+</button>
         </div>
       </nav>
 
