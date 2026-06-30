@@ -139,7 +139,7 @@ function App() {
     dispatch(setStatus('Idle')); 
   }
 };
-  };
+  
 
   const handleSubmitCode = async (e) => {
   if (e) e.preventDefault();
@@ -532,5 +532,5 @@ function App() {
       )}
     </div>
   );
-
+}
 export default App;
