@@ -68,6 +68,13 @@ function App() {
 
   
   useEffect(() => {
+    if (!token || !username) {
+      dispatch(setAuthView('login'));
+    }
+  }, [token, username, dispatch]);
+
+  
+  useEffect(() => {
     if (code && currentProblem?._id) {
       const delayDebounce = setTimeout(() => {
         localStorage.setItem(`autosave_${currentProblem._id}`, code);
