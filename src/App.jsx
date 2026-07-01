@@ -98,11 +98,20 @@ function App() {
   const isDark = theme === 'dark';
 
   
-  useEffect(() => {
-    if (!token || !username) {
-      dispatch(setAuthView('login'));
-    }
-  }, [token, username, dispatch]);
+  // App.jsx ke top hooks ke paas check karo ki initial loading par local storage utha rha hai ya nahi
+useEffect(() => {
+  const localToken = localStorage.getItem('token');
+  const localUser = localStorage.getItem('username');
+  
+  if (localToken && localUser) {
+    // Agar local storage me pehle se token fasa hai toh state sync karo
+    dispatch(loginSuccess({ token: localToken, username: localUser }));
+    dispatch(setAuthView('judge'));
+  } else {
+    dispatch(logout());
+    dispatch(setAuthView('login'));
+  }
+}, [dispatch]);
 
   
   useEffect(() => {
